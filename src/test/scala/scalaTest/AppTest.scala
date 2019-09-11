@@ -38,6 +38,9 @@ class AppTest extends Serializable {
         env.setParallelism(1)
         //过滤出动作电影
         val actionMovie = movies.filter(movie => movie.genres.contains("Action"))
+        //输出流 需要最后 env.excute()
+        actionMovie.writeAsText("./output/action.txt").setParallelism(1)
+        //print 已经包含 env.excute()
         actionMovie.print()
     }
 

@@ -3,16 +3,18 @@ package scalaTest
 import org.apache.flink.api.scala.ExecutionEnvironment
 import org.apache.flink.streaming.api.scala._
 
-
+/**
+  * 不使用实体类
+  */
 object ReadCsvFile {
 
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
-    // 直接将数据，转成Student（相当于Schema）
-    val values = env.readCsvFile[Movie]("./file/movies.csv",ignoreFirstLine = true)
-    values.print()
+    // 直接将数据，转成 Tuple3 含有三个参数的
+    val values = env.readCsvFile[(Long,String,String)]("./file/movies.csv",ignoreFirstLine = true)
+    val result = values.filter(_._3.contains("Action"))
+    result.print()
   }
-  /** 定义一个 movie类 */
-  case class Movie(id: Long, name: String ,genres: String)
+
 }

@@ -10,9 +10,9 @@ object ReadCsvFile {
     val env = ExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
     // 直接将数据，转成Student（相当于Schema）
-    val values = env.readCsvFile[Movie]("./file/movies.csv")
+    val values = env.readCsvFile[Movie]("./file/movies.csv",ignoreFirstLine = true)
     values.print()
   }
   /** 定义一个 movie类 */
-  case class Movie(id: Long, name: String ,genres: Set[String])
+  case class Movie(id: Long, name: String ,genres: String)
 }

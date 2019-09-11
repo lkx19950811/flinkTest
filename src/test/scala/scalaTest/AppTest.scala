@@ -1,6 +1,9 @@
 package scalaTest
+import java.util
+
 import org.apache.flink.api.scala._
 import org.junit._
+
 
 
 @Test
@@ -19,7 +22,10 @@ class AppTest extends Serializable {
         result.print()
     }
     /** 定义一个 movie类 */
-    case class Movie(id: Long, name: String ,genres: String)
+    case class Movie(id: Long, name: String ,genres: Array[String]){
+        //重写下toString,不然 数组没法正确的打印
+        override def toString: String = "Movie: " + "id:" + id + "," + "name:" + name + "," + "[" + genres.reduce(_ + "," + _) + "]"
+    }
     /**
       * 读取 电影csv文件,转换成 movie对象
       * 并且过滤出动作电影
@@ -27,7 +33,8 @@ class AppTest extends Serializable {
     @Test
     def testText(): Unit = {
         val env:ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
-        val movies = env.readCsvFile[Movie]("./file/movies.csv",ignoreFirstLine = true)
+        val lines = env.readCsvFile[(Long, String, String)]("./file/movies.csv",ignoreFirstLine = true)
+        val movies = lines.map(t=>Movie(t._1,t._2,t._3.split("\\|")))
         env.setParallelism(1)
         //过滤出动作电影
         val actionMovie = movies.filter(movie => movie.genres.contains("Action"))

@@ -32,6 +32,7 @@ class AppTest extends Serializable {
     @Test
     def testText(): Unit = {
         val env:ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
+        //读取时需要忽略首行
         val lines = env.readCsvFile[(Long, String, String)]("./file/movies.csv",ignoreFirstLine = true)
         //先整合成 Movie对象,然后过滤
         val actionMovie = lines.map(t=>Movie(t._1,t._2,t._3.split("\\|")))

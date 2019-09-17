@@ -14,6 +14,7 @@ object ReadCsvFile {
   def main(args: Array[String]): Unit = {
     val env = ExecutionEnvironment.getExecutionEnvironment
     env.setParallelism(1)
+    //读取时需要忽略首行
     // 直接将数据，转成 Tuple3 含有三个参数的
     val values = env.readCsvFile[(Long,String,String)]("./file/movies.csv",ignoreFirstLine = true)
     val result = values.filter(_._3.contains("Action"))

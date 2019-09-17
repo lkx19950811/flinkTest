@@ -6,6 +6,8 @@ the test demo in test/scala/scalaTest
 my scala version is 2.12.0
 this project just for learning
 
+普通的读取csv文件进行处理的例子在 test下<br>
+
 使用 KafkaDemo的时候 需要下载Kafka<br>
 http://mirror.bit.edu.cn/apache/kafka/2.2.0/kafka_2.11-2.2.0.tgz
 

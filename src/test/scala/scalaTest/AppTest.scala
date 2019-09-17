@@ -1,5 +1,4 @@
 package scalaTest
-import java.util
 
 import org.apache.flink.api.scala._
 import org.junit._

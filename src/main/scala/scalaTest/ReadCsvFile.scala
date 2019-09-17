@@ -5,6 +5,7 @@ import org.apache.flink.streaming.api.scala._
 
 /**
   * 不使用实体类
+  * 读取CSV文件 文件在 file文件夹下
   */
 object ReadCsvFile {
 

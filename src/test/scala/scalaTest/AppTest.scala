@@ -33,10 +33,10 @@ class AppTest extends Serializable {
     def testText(): Unit = {
         val env:ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment
         val lines = env.readCsvFile[(Long, String, String)]("./file/movies.csv",ignoreFirstLine = true)
-        val movies = lines.map(t=>Movie(t._1,t._2,t._3.split("\\|")))
+        //先整合成 Movie对象,然后过滤
+        val actionMovie = lines.map(t=>Movie(t._1,t._2,t._3.split("\\|")))
+          .filter(movie => movie.genres.contains("Action"))
         env.setParallelism(1)
-        //过滤出动作电影
-        val actionMovie = movies.filter(movie => movie.genres.contains("Action"))
         //输出流 需要最后 env.excute()
         actionMovie.writeAsText("./output/action.txt").setParallelism(1)
         //print 已经包含 env.excute()

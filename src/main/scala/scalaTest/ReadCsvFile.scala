@@ -6,6 +6,8 @@ import org.apache.flink.streaming.api.scala._
 /**
   * 不使用实体类
   * 读取CSV文件 文件在 file文件夹下
+  *
+  * 将读取到的电影数据,过滤出动作电影并打印
   */
 object ReadCsvFile {
 

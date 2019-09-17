@@ -11,7 +11,9 @@ import org.apache.flink.streaming.util.serialization.SimpleStringSchema
 object KafkaDemo {
   private val ZOOKEEPER_HOST = "localhost:2181"
   private val KAFKA_BROKER = "localhost:9092"
+  /** 消费组 */
   private val TRANSACTION_GROUP = "com.lee.flink"
+  /** topic */
   private val TOPIC_NAME = "demo"
   def main(args: Array[String]): Unit = {
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

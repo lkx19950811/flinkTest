@@ -11,7 +11,6 @@ object SocketWindowWordCount {
     */
   def main(args: Array[String]) : Unit = {
 
-
     // get the execution environment
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 
